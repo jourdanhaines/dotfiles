@@ -22,6 +22,13 @@ echo "Copying config from $SCRIPT_DIR/.config/tmux to $HOME/.config/"
 mkdir -p "$SCRIPT_DIR/.config/tmux"
 cp -r "$SCRIPT_DIR/.config/tmux" "$HOME/.config/"
 
+if ! [ -d "$HOME/.config/tmux/plugins" ]; then
+    echo "Installing tpm for tmux..."
+    mkdir -p "$HOME/.config/tmux/plugins"
+    git clone "https://github.com/tmux-plugins/tpm" "$HOME/.config/tmux/plugins/tpm"
+    echo "Cloned successfully!"
+fi
+
 echo "Copying config from $SCRIPT_DIR/.config/starship to $HOME/.config/"
 mkdir -p "$SCRIPT_DIR/.config/starship"
 cp -r "$SCRIPT_DIR/.config/starship" "$HOME/.config/"
