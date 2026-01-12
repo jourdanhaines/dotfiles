@@ -26,5 +26,9 @@ echo "Copying config from $SCRIPT_DIR/.config/starship to $HOME/.config/"
 mkdir -p "$SCRIPT_DIR/.config/starship"
 cp -r "$SCRIPT_DIR/.config/starship" "$HOME/.config/"
 
+echo "Copying config from $SCRIPT_DIR/.config/wofi to $HOME/.config/"
+mkdir -p "$SCRIPT_DIR/.config/wofi"
+cp -r "$SCRIPT_DIR/.config/wofi" "$HOME/.config/"
+
 echo ".config dotfiles copied from $SCRIPT_DIR/.config/ to $HOME/.config/"
 
