@@ -37,5 +37,9 @@ echo "Copying config from $SCRIPT_DIR/.config/wofi to $HOME/.config/"
 mkdir -p "$SCRIPT_DIR/.config/wofi"
 cp -r "$SCRIPT_DIR/.config/wofi" "$HOME/.config/"
 
+echo "Copying config from $SCRIPT_DIR/.config/fastfetch to $HOME/.config/"
+mkdir -p "$SCRIPT_DIR/.config/fastfetch"
+cp -r "$SCRIPT_DIR/.config/fastfetch" "$HOME/.config/"
+
 echo ".config dotfiles copied from $SCRIPT_DIR/.config/ to $HOME/.config/"
 
