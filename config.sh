@@ -41,5 +41,9 @@ echo "Copying config from $SCRIPT_DIR/.config/fastfetch to $HOME/.config/"
 mkdir -p "$SCRIPT_DIR/.config/fastfetch"
 cp -r "$SCRIPT_DIR/.config/fastfetch" "$HOME/.config/"
 
+echo "Copying config from $SCRIPT_DIR/.config/waybar to $HOME/.config/"
+mkdir -p "$SCRIPT_DIR/.config/waybar"
+cp -r "$SCRIPT_DIR/.config/waybar" "$HOME/.config/"
+
 echo ".config dotfiles copied from $SCRIPT_DIR/.config/ to $HOME/.config/"
 

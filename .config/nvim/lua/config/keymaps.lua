@@ -5,6 +5,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Go to definition
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+    
+    -- Hover intellisense
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+
+    -- Rename
+    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+
+    -- Format
+    vim.keymap.set("n", "<space>f", function()
+        vim.lsp.buf.format { async = true }
+    end, opts)
 
     -- (optional, nice to have)
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
