@@ -53,7 +53,7 @@
   },
 
   "clock": {
-    "timezone": "Asia/Kolkata",
+    "timezone": "Australia/Hobart",
     "tooltip": false,
     "format": "{:%H:%M:%S  -  %A, %d}",
     "interval": 1
