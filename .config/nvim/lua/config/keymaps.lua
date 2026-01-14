@@ -1,3 +1,21 @@
+-- Global keymaps (always available)
+
+vim.g.mapleader = "<Space>"
+
+-- Open fzf for current directory
+vim.keymap.set("n", "ff", function()
+    require("fzf-lua").files({
+        cwd = vim.fn.getcwd(),
+        git_icons = true,
+        file_icons = true
+    })
+end, { desc = "Project Files" })
+
+-- Open live grep
+vim.keymap.set("n", "fg", function()
+    require("fzf-lua").live_grep()
+end, { desc = "Live Grep" })
+
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true }),
     callback = function(ev)
@@ -24,20 +42,4 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, vim.tbl_extend("force", opts, { desc = "Type definition" }))
     end,
 })
-
--- Global keymaps (always available)
-
--- Open fzf for current directory
-vim.keymap.set("n", "ff", function()
-    require("fzf-lua").files({
-        cwd = vim.fn.getcwd(),
-        git_icons = true,
-        file_icons = true
-    })
-end, { desc = "Project Files" })
-
--- Open live grep
-vim.keymap.set("n", "fg", function()
-    require("fzf-lua").live_grep()
-end, { desc = "Live Grep" })
 
