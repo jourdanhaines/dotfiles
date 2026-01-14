@@ -16,3 +16,12 @@ sh: line 1: waybar-module-pomodoro: command not found
 [2026-01-13 13:39:17.283] [warning] No batteries.
 [2026-01-13 13:39:17.493] [info] Bar configured (width: 3440, height: 40) for output: HDMI-A-1
 [2026-01-13 13:39:17.493] [info] Bar configured (width: 3440, height: 40) for output: DP-1
+sh: line 1: /home/alpinedev/.config/waybar/scripts/uptime.sh: Permission denied
+sh: line 1: /home/alpinedev/.config/waybar/scripts/uptime.sh: Permission denied
+sh: line 1: /home/alpinedev/.config/waybar/scripts/uptime.sh: Permission denied
+sh: line 1: /home/alpinedev/.config/waybar/scripts/uptime.sh: Permission denied
+sh: line 1: /home/alpinedev/.config/waybar/scripts/uptime.sh: Permission denied
+sh: line 1: /home/alpinedev/.config/waybar/scripts/uptime.sh: Permission denied
+sh: line 1: /home/alpinedev/.config/waybar/scripts/uptime.sh: Permission denied
+sh: line 1: /home/alpinedev/.config/waybar/scripts/uptime.sh: Permission denied
+Gdk-Message: 15:49:45.515: Error reading events from display: Connection reset by peer
