@@ -1,7 +1,4 @@
 -- Global keymaps (always available)
-
-vim.g.mapleader = "<Space>"
-
 -- Open fzf for current directory
 vim.keymap.set("n", "ff", function()
     require("fzf-lua").files({
