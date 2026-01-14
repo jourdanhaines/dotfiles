@@ -13,7 +13,7 @@ return {
             desc = "Open yazi at the current file",
         },
         {
-            "<C-p>",
+            "<C-w><C-d>",
             "<cmd>Yazi cwd<cr>",
             desc = "Open the file manager in nvim's working directory",
         },

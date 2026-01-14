@@ -40,3 +40,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+local telescope = require("telescope.builtin")
+vim.keymap.set("n", "<leader>pf", telescope.find_files, {})
+vim.keymap.set("n", "<C-p>", telescope.git_files, {})
