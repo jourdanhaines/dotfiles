@@ -59,3 +59,4 @@ macos-option-as-alt = true
 
 keybind = alt+up=text:\x1b[1;3A
 keybind = alt+down=text:\x1b[1;3B
+keybind = ctrl+shift+p=unbind

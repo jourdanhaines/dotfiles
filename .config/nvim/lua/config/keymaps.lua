@@ -5,6 +5,7 @@ vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv")
 local harpoon = require("harpoon")
 
 vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader>rm", function() harpoon:list():remove() end)
 vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
 vim.keymap.set("n", "<C-1>", function() harpoon:list().select(1) end)
