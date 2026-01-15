@@ -20,4 +20,10 @@ vim.o.updatetime = 50
 vim.o.colorcolumn = "120"
 
 require("config.lazy")
+
+-- Post-init packages
+local harpoon = require("harpoon")
+harpoon:setup()
+
 require("config.keymaps")
+
