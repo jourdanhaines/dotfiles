@@ -54,3 +54,8 @@ command = /home/alpinedev/dev/scripts/tmux/tmux_start.sh
 background-opacity = 0.8
 
 confirm-close-surface = false
+
+macos-option-as-alt = true
+
+keybind = alt+up=text:\x1b[1;3A
+keybind = alt+down=text:\x1b[1;3B

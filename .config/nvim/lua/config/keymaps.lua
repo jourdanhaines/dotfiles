@@ -1,4 +1,7 @@
 -- Global keymaps (always available)
+vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv")
+
 -- Open fzf for current directory
 vim.keymap.set("n", "ff", function()
     require("fzf-lua").files({
