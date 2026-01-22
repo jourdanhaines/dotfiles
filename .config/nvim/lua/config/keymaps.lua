@@ -26,7 +26,7 @@ vim.keymap.set("n", "ff", function()
 end, { desc = "Project Files" })
 
 -- Open live grep
-vim.keymap.set("n", "fg", function()
+vim.keymap.set("n", "<C-S-F>", function()
     require("fzf-lua").live_grep()
 end, { desc = "Live Grep" })
 
