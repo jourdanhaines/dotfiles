@@ -13,8 +13,8 @@ vim.keymap.set("n", "<C-2>", function() harpoon:list().select(2) end)
 vim.keymap.set("n", "<C-3>", function() harpoon:list().select(3) end)
 vim.keymap.set("n", "<C-4>", function() harpoon:list().select(4) end)
 
-vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
-vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+vim.keymap.set("n", "<C-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-N>", function() harpoon:list():next() end)
 
 -- Open fzf for current directory
 vim.keymap.set("n", "ff", function()
@@ -26,7 +26,7 @@ vim.keymap.set("n", "ff", function()
 end, { desc = "Project Files" })
 
 -- Open live grep
-vim.keymap.set("n", "<C-S-F>", function()
+vim.keymap.set("n", "<C-F>", function()
     require("fzf-lua").live_grep()
 end, { desc = "Live Grep" })
 
