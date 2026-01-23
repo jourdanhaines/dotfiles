@@ -3,18 +3,21 @@
   "position": "top",
   "margin-bottom": -10,
   "spacing" : 0,
+
   "modules-left": [
-  "hyprland/workspaces",
-  "custom/uptime",
-  "cpu"
+      "hyprland/workspaces",
+      "custom/uptime",
+      "cpu",
+      "custom/nvidia",
+      "memory"
   ],
 
   "modules-center": ["clock"],
 
   "modules-right": [
-    "custom/pomodoro",
     "bluetooth",
     "network",
+    "tray",
     "pulseaudio", 
     "backlight",
     "battery",
@@ -61,7 +64,7 @@
 
   "network": {
     "format-wifi": "󰤢",
-    "format-ethernet": "󰈀 ",
+    "format-ethernet": "󰈀",
     "format-disconnected": "󰤠 ",
     "interval": 5,
     "tooltip-format": "{essid} ({signalStrength}%)",
@@ -75,6 +78,13 @@
     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
     "on-click": "ghostty -e htop"
   },
+
+    "custom/nvidia": {
+       "exec": "nvidia-smi --query-gpu=name,utilization.gpu,temperature.gpu --format=csv,nounits,noheader | sed -E 's/^([^,]+), *([0-9]+), *([0-9]+)/\\1 \\2% \\3°C/g'",
+       "format": "  {}",
+        "interval": 2,
+        "on-click": "ghostty -e nvtop"
+    },
 
   "memory": {
     "interval": 30,
@@ -105,6 +115,15 @@
     "on-click": "pavucontrol"
   },
 
+  "tray": {
+    "icon-size": 14,
+    "spacing": 10,
+    "icons": {
+        "Discord": " ",
+        "Steam": " "
+    }
+  },
+
   "battery": {
         "interval":2,
         "states": {
@@ -123,17 +142,9 @@
   },
   
   "custom/lock": {
-  "tooltip": false,
-  "on-click": "sh -c '(sleep 0s; hyprlock)' & disown",
-  "format" : ""
-  },
-
-  "custom/pomodoro": {
-	"format": "{}",
-	"return-type": "json",
-	"exec": "waybar-module-pomodoro --no-work-icons",
-	"on-click": "waybar-module-pomodoro toggle",
-	"on-click-right": "waybar-module-pomodoro reset",
+      "tooltip": false,
+      "on-click": "sh -c '(sleep 0s; hyprlock)' & disown",
+      "format" : ""
   },
 
 }
