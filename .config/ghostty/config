@@ -49,7 +49,7 @@
 # resize-overlay-duration = 4s 200ms
 theme = Catppuccin Mocha
 
-command = /home/alpinedev/dev/scripts/tmux/tmux_start.sh
+command = ~/.config/ghostty/tmux_start.sh
 
 background-opacity = 0.8
 
