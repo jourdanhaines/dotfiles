@@ -19,6 +19,8 @@ vim.o.updatetime = 50
 
 vim.o.colorcolumn = "120"
 
+vim.o.autochdir = true
+
 require("config.lazy")
 
 -- Post-init packages
