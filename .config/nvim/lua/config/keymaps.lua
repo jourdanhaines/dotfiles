@@ -61,6 +61,15 @@ vim.keymap.set("n", "<C-F>", function()
     require("fzf-lua").live_grep()
 end, { desc = "Live Grep" })
 
+-- Format file
+vim.keymap.set({ "n", "v" }, "<leader>fm", function()
+    require("conform").format({
+        lsp_fallback = true,
+        async = false,
+        timeout_ms = 1000,
+    })
+end, { desc = "Format file or range" })
+
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true }),
     callback = function(ev)
