@@ -3,8 +3,8 @@ vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv")
 
 -- Line navigation (replaces ^ and $)
-vim.keymap.set("n", "<leader><Left>", "^", { desc = "Go to first character of line" })
-vim.keymap.set("n", "<leader><Right>", "$", { desc = "Go to last character of line" })
+vim.keymap.set({ "n", "v" }, "<leader><Left>", "^", { desc = "Go to first character of line" })
+vim.keymap.set({ "n", "v" }, "<leader><Right>", "$", { desc = "Go to last character of line" })
 
 -- Center cursor after jumps
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Page down and center" })
