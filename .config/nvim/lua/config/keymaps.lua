@@ -35,78 +35,111 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear highlights" 
 
 local harpoon = require("harpoon")
 
-vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-vim.keymap.set("n", "<leader>rm", function() harpoon:list():remove() end)
-vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set("n", "<leader>a", function()
+	harpoon:list():add()
+end)
+vim.keymap.set("n", "<leader>rm", function()
+	harpoon:list():remove()
+end)
+vim.keymap.set("n", "<C-e>", function()
+	harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
 
-vim.keymap.set("n", "<C-1>", function() harpoon:list().select(1) end)
-vim.keymap.set("n", "<C-2>", function() harpoon:list().select(2) end)
-vim.keymap.set("n", "<C-3>", function() harpoon:list().select(3) end)
-vim.keymap.set("n", "<C-4>", function() harpoon:list().select(4) end)
+vim.keymap.set("n", "<C-1>", function()
+	harpoon:list().select(1)
+end)
+vim.keymap.set("n", "<C-2>", function()
+	harpoon:list().select(2)
+end)
+vim.keymap.set("n", "<C-3>", function()
+	harpoon:list().select(3)
+end)
+vim.keymap.set("n", "<C-4>", function()
+	harpoon:list().select(4)
+end)
 
-vim.keymap.set("n", "<C-P>", function() harpoon:list():prev() end)
-vim.keymap.set("n", "<C-N>", function() harpoon:list():next() end)
+vim.keymap.set("n", "<C-P>", function()
+	harpoon:list():prev()
+end)
+vim.keymap.set("n", "<C-N>", function()
+	harpoon:list():next()
+end)
 
 -- Open fzf for current directory
 vim.keymap.set("n", "ff", function()
-    require("fzf-lua").files({
-        cwd = vim.fn.getcwd(),
-        git_icons = true,
-        file_icons = true
-    })
+	require("fzf-lua").files({
+		cwd = vim.fn.getcwd(),
+		git_icons = true,
+		file_icons = true,
+	})
 end, { desc = "Project Files" })
 
 -- Open live grep
 vim.keymap.set("n", "<C-F>", function()
-    require("fzf-lua").live_grep()
+	require("fzf-lua").live_grep()
 end, { desc = "Live Grep" })
 
 -- Format file
-vim.keymap.set({ "n", "v" }, "<leader>fm", function()
-    require("conform").format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-    })
+vim.keymap.set({ "n", "v" }, "<leader>f", function()
+	require("conform").format({
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 1000,
+	})
 end, { desc = "Format file or range" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true }),
-    callback = function(ev)
-        local opts = { buffer = ev.buf, silent = true, noremap = true }
+	group = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true }),
+	callback = function(ev)
+		local opts = { buffer = ev.buf, silent = true, noremap = true }
 
-        -- Go to definition
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+		-- Go to definition
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
 
-        -- Hover intellisense
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		-- Hover intellisense
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
-        -- Rename
-        vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+		-- Rename
+		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
 
-        -- Format
-        vim.keymap.set("n", "<space>f", function()
-            vim.lsp.buf.format { async = true }
-        end, opts)
+		-- (optional, nice to have)
+		vim.keymap.set(
+			"n",
+			"gD",
+			vim.lsp.buf.declaration,
+			vim.tbl_extend("force", opts, { desc = "Go to declaration" })
+		)
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "References" }))
+		vim.keymap.set(
+			"n",
+			"gi",
+			vim.lsp.buf.implementation,
+			vim.tbl_extend("force", opts, { desc = "Implementation" })
+		)
+		vim.keymap.set(
+			"n",
+			"gt",
+			vim.lsp.buf.type_definition,
+			vim.tbl_extend("force", opts, { desc = "Type definition" })
+		)
 
-        -- (optional, nice to have)
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "References" }))
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", opts, { desc = "Implementation" }))
-        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, vim.tbl_extend("force", opts, { desc = "Type definition" }))
+		-- Code actions
+		vim.keymap.set(
+			"n",
+			"<leader>ca",
+			vim.lsp.buf.code_action,
+			vim.tbl_extend("force", opts, { desc = "Code action" })
+		)
 
-        -- Code actions
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code action" }))
+		-- Diagnostics
+		vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic" })
+		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+		vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Diagnostics to loclist" })
 
-        -- Diagnostics
-        vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic" })
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-        vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Diagnostics to loclist" })
-
-        -- Signature help
-        vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
-    end,
+		-- Signature help
+		vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
+	end,
 })
 
 local telescope = require("telescope.builtin")
