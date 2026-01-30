@@ -76,7 +76,10 @@ end, { desc = "Project Files" })
 
 -- Open live grep
 vim.keymap.set("n", "<C-F>", function()
-	require("fzf-lua").live_grep()
+	local git_root = vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
+	require("fzf-lua").live_grep({
+		cwd = git_root ~= "" and git_root or vim.fn.getcwd(),
+	})
 end, { desc = "Live Grep" })
 
 -- Format file

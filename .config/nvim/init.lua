@@ -43,17 +43,5 @@ vim.diagnostic.config({
 
 require("config.lazy")
 
--- Post-init packages
-local harpoon = require("harpoon")
-harpoon:setup({
-    settings = {
-        save_on_toggle = true,
-        sync_on_ui_close = true,
-        key = function()
-            return vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
-        end,
-    }
-})
-
 require("config.keymaps")
 
