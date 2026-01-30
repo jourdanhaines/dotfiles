@@ -21,11 +21,27 @@ vim.o.colorcolumn = "120"
 
 vim.o.autochdir = true
 
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+})
+
 require("config.lazy")
 
 -- Post-init packages
 local harpoon = require("harpoon")
-harpoon:setup()
+harpoon:setup({
+    settings = {
+        save_on_toggle = true,
+        sync_on_ui_close = true,
+        key = function()
+            return vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
+        end,
+    }
+})
 
 require("config.keymaps")
 
