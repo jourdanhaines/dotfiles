@@ -21,6 +21,18 @@ vim.o.colorcolumn = "120"
 
 vim.o.autochdir = true
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank({ timeout = 150 })
+        local lines = #vim.v.event.regcontents
+        if lines > 1 then
+            vim.schedule(function()
+                vim.notify(lines .. " lines yanked", vim.log.levels.INFO)
+            end)
+        end
+    end,
+})
+
 vim.diagnostic.config({
     virtual_text = true,
     signs = true,
