@@ -15,6 +15,10 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev search result centered" })
 -- Better paste (don't yank replaced text)
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without yanking" })
 
+-- Better yank (yank to clipboard)
+vim.keymap.set("n", "<leader>y", [["+yiw"]], { desc = "Yank word to main clipboard" })
+vim.keymap.set("v", "<leader>y", [["+y"]], { desc = "Yank selection to main clipboard" })
+
 -- Delete without yanking
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without yanking" })
 
