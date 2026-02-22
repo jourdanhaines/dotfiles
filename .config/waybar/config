@@ -12,7 +12,7 @@
       "memory"
   ],
 
-  "modules-center": ["clock"],
+  "modules-center": ["clock", "custom/weather"],
 
   "modules-right": [
     "bluetooth",
@@ -58,7 +58,7 @@
   "clock": {
     "timezone": "Australia/Hobart",
     "tooltip": false,
-    "format": "{:%H:%M:%S  -  %A, %d}",
+    "format": "{:%H:%M:%S  |  %a %d}",
     "interval": 1
   },
 
@@ -141,6 +141,14 @@
         "format-icons": ["", "", "", "", ""]
   },
   
+
+  "custom/weather": {
+    "format": "  |  {}",
+    "tooltip": false,
+    "interval": 600,
+    "signal": 8,
+    "exec": "$HOME/.config/waybar/scripts/weather.sh"
+  },
   "custom/lock": {
       "tooltip": false,
       "on-click": "sh -c '(sleep 0s; hyprlock)' & disown",
