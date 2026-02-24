@@ -147,7 +147,8 @@
     "tooltip": false,
     "interval": 600,
     "signal": 8,
-    "exec": "$HOME/.config/waybar/scripts/weather.sh"
+    "exec": "$HOME/.config/waybar/scripts/weather.sh",
+    "on-click": "$HOME/.config/waybar/scripts/weather-forecast.sh"
   },
   "custom/lock": {
       "tooltip": false,
