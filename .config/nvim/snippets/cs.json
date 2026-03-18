@@ -1,0 +1,219 @@
+{
+  "Awake": {
+    "prefix": "Awake",
+    "body": [
+      "private void Awake() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity Awake lifecycle method"
+  },
+  "Start": {
+    "prefix": "Start",
+    "body": [
+      "private void Start() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity Start lifecycle method"
+  },
+  "Update": {
+    "prefix": "Update",
+    "body": [
+      "private void Update() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity Update lifecycle method"
+  },
+  "FixedUpdate": {
+    "prefix": "FixedUpdate",
+    "body": [
+      "private void FixedUpdate() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity FixedUpdate lifecycle method"
+  },
+  "LateUpdate": {
+    "prefix": "LateUpdate",
+    "body": [
+      "private void LateUpdate() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity LateUpdate lifecycle method"
+  },
+  "OnEnable": {
+    "prefix": "OnEnable",
+    "body": [
+      "private void OnEnable() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnEnable lifecycle method"
+  },
+  "OnDisable": {
+    "prefix": "OnDisable",
+    "body": [
+      "private void OnDisable() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnDisable lifecycle method"
+  },
+  "OnDestroy": {
+    "prefix": "OnDestroy",
+    "body": [
+      "private void OnDestroy() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnDestroy lifecycle method"
+  },
+  "OnCollisionEnter": {
+    "prefix": "OnCollisionEnter",
+    "body": [
+      "private void OnCollisionEnter(Collision ${1:collision}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnCollisionEnter callback"
+  },
+  "OnCollisionExit": {
+    "prefix": "OnCollisionExit",
+    "body": [
+      "private void OnCollisionExit(Collision ${1:collision}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnCollisionExit callback"
+  },
+  "OnCollisionStay": {
+    "prefix": "OnCollisionStay",
+    "body": [
+      "private void OnCollisionStay(Collision ${1:collision}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnCollisionStay callback"
+  },
+  "OnTriggerEnter": {
+    "prefix": "OnTriggerEnter",
+    "body": [
+      "private void OnTriggerEnter(Collider ${1:other}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnTriggerEnter callback"
+  },
+  "OnTriggerExit": {
+    "prefix": "OnTriggerExit",
+    "body": [
+      "private void OnTriggerExit(Collider ${1:other}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnTriggerExit callback"
+  },
+  "OnTriggerStay": {
+    "prefix": "OnTriggerStay",
+    "body": [
+      "private void OnTriggerStay(Collider ${1:other}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnTriggerStay callback"
+  },
+  "OnApplicationQuit": {
+    "prefix": "OnApplicationQuit",
+    "body": [
+      "private void OnApplicationQuit() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnApplicationQuit callback"
+  },
+  "OnApplicationPause": {
+    "prefix": "OnApplicationPause",
+    "body": [
+      "private void OnApplicationPause(bool ${1:pauseStatus}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnApplicationPause callback"
+  },
+  "OnApplicationFocus": {
+    "prefix": "OnApplicationFocus",
+    "body": [
+      "private void OnApplicationFocus(bool ${1:hasFocus}) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnApplicationFocus callback"
+  },
+  "OnBecameVisible": {
+    "prefix": "OnBecameVisible",
+    "body": [
+      "private void OnBecameVisible() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnBecameVisible callback"
+  },
+  "OnBecameInvisible": {
+    "prefix": "OnBecameInvisible",
+    "body": [
+      "private void OnBecameInvisible() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnBecameInvisible callback"
+  },
+  "OnDrawGizmos": {
+    "prefix": "OnDrawGizmos",
+    "body": [
+      "private void OnDrawGizmos() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnDrawGizmos callback"
+  },
+  "OnGUI": {
+    "prefix": "OnGUI",
+    "body": [
+      "private void OnGUI() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnGUI callback"
+  },
+  "OnValidate": {
+    "prefix": "OnValidate",
+    "body": [
+      "private void OnValidate() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity OnValidate editor callback"
+  },
+  "Reset": {
+    "prefix": "Reset",
+    "body": [
+      "private void Reset() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Unity Reset editor callback"
+  },
+  "Coroutine": {
+    "prefix": "Coroutine",
+    "body": [
+      "private IEnumerator ${1:CoroutineName}() {",
+      "\t$0",
+      "\tyield return null;",
+      "}"
+    ],
+    "description": "Unity Coroutine method"
+  }
+}
