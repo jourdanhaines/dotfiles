@@ -55,3 +55,18 @@ cp -r "$SCRIPT_DIR/.config/aerospace" "$HOME/.config/"
 
 echo ".config dotfiles copied from $SCRIPT_DIR/.config/ to $HOME/.config/"
 
+echo "Installing Claude Code statusline to $HOME/.claude/"
+mkdir -p "$HOME/.claude"
+cp "$SCRIPT_DIR/.claude/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
+chmod +x "$HOME/.claude/statusline-command.sh"
+
+CLAUDE_SETTINGS="$HOME/.claude/settings.json"
+STATUSLINE_CFG='{"statusLine":{"type":"command","command":"bash '"$HOME"'/.claude/statusline-command.sh"}}'
+if [ -f "$CLAUDE_SETTINGS" ]; then
+    tmp=$(mktemp)
+    jq --argjson add "$STATUSLINE_CFG" '. * $add' "$CLAUDE_SETTINGS" > "$tmp" && mv "$tmp" "$CLAUDE_SETTINGS"
+else
+    echo "$STATUSLINE_CFG" | jq . > "$CLAUDE_SETTINGS"
+fi
+echo "Claude statusline configured in $CLAUDE_SETTINGS"
+
