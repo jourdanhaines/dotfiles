@@ -133,6 +133,45 @@
   outline: none;
 }
 
+/* --- Timer module group (display + play/pause + stop, seamless bar left of the right-most bar) --- */
+#custom-timer-display,
+#custom-timer-toggle,
+#custom-timer-stop {
+  background-color: #1a1b26;
+  padding: 0.3rem 0.6rem;
+  margin: 5px 0px;
+  border-radius: 0;
+  box-shadow: none;
+  min-width: 0;
+  border: none;
+  color: #babbf1;
+  font-weight: 600;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+#custom-timer-display {
+  padding-left: 0.7rem;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+#custom-timer-stop {
+  padding-right: 0.7rem;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  margin-right: 5px; /* spacing before the right-most seamless bar */
+}
+
+#custom-timer-display:hover,
+#custom-timer-toggle:hover,
+#custom-timer-stop:hover {
+  background-color: rgb(41, 42, 53);
+  color: #c6d0f5;
+}
+
+/* Active-state indicator lives inside the readout text (Pango markup on the
+   icon only), so the module-level color stays unchanged across states. */
+
 /* --- Right Modules (Single, Seamless Bar ) --- */
 #bluetooth,
 #pulseaudio,

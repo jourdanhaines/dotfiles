@@ -15,10 +15,13 @@
   "modules-center": ["clock", "custom/weather"],
 
   "modules-right": [
+    "custom/timer-display",
+    "custom/timer-toggle",
+    "custom/timer-stop",
     "bluetooth",
     "network",
     "tray",
-    "pulseaudio", 
+    "pulseaudio",
     "backlight",
     "battery",
   ],
@@ -99,7 +102,34 @@
     "interval": 1600,
     "exec": "$HOME/.config/waybar/scripts/uptime.sh"
   },
-  
+
+  "custom/timer-display": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 1,
+    "signal": 9,
+    "exec": "$HOME/.config/waybar/scripts/timer.sh display-main",
+    "on-click": "$HOME/.config/waybar/scripts/timer.sh set"
+  },
+
+  "custom/timer-toggle": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 1,
+    "signal": 9,
+    "exec": "$HOME/.config/waybar/scripts/timer.sh display-toggle",
+    "on-click": "$HOME/.config/waybar/scripts/timer.sh toggle"
+  },
+
+  "custom/timer-stop": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 1,
+    "signal": 9,
+    "exec": "$HOME/.config/waybar/scripts/timer.sh display-stop",
+    "on-click": "$HOME/.config/waybar/scripts/timer.sh stop"
+  },
+
   "backlight": {
         "format": "{icon}  {percent}%",
         "format-icons": ["","󰃜", "󰃛", "󰃞","󰃝","󰃟","󰃠"],
