@@ -53,6 +53,10 @@ echo "Copying config from $SCRIPT_DIR/.config/aerospace to $HOME/.config/"
 mkdir -p "$SCRIPT_DIR/.config/aerospace"
 cp -r "$SCRIPT_DIR/.config/aerospace" "$HOME/.config/"
 
+echo "Copying config from $SCRIPT_DIR/.config/sunshine to $HOME/.config/"
+mkdir -p "$SCRIPT_DIR/.config/sunshine"
+cp -r "$SCRIPT_DIR/.config/sunshine" "$HOME/.config/"
+
 echo ".config dotfiles copied from $SCRIPT_DIR/.config/ to $HOME/.config/"
 
 echo "Installing Claude Code statusline to $HOME/.claude/"
