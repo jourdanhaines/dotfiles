@@ -17,12 +17,25 @@ set -uo pipefail
 ###############################################################################
 VIRTUAL_NAME="sunshine"                 # arg passed to `hyprctl output create headless`
 VIRTUAL_OUTPUT="sunshine"               # the RESULTING monitor name (confirm via `hyprctl monitors`)
-PHYSICAL_OUTPUTS=("DP-1" "HDMI-A-1")
+PHYSICAL_OUTPUTS=("DP-1" "HDMI-A-1")    # names to `disable` while streaming
+# Exact restore lines — MUST mirror the monitor= lines in hyprland.conf (DP-1, HDMI-A-1).
+# We re-apply these explicitly because `hyprctl reload` does NOT re-enable a runtime-disabled
+# monitor (Hyprland issue #6623), which is what left the panels dark and forced a reboot.
+PHYSICAL_RESTORE=(
+  "DP-1,3440x1440@143.85,0x0,1"
+  "HDMI-A-1,3440x1440@84.96,0x-1440,1"
+)
 FALLBACK_MODE="3440x1440@60"
 LOG="/tmp/sunshine-vdisplay.log"
 ###############################################################################
 
 log(){ printf '%s [vdisplay] %s\n' "$(date +%H:%M:%S)" "$*" | tee -a "$LOG" >&2; }
+
+# Deterministically bring the physical panels back. Never relies on `hyprctl reload`.
+restore_physicals(){
+  for line in "${PHYSICAL_RESTORE[@]}"; do hyprctl keyword monitor "$line" >/dev/null 2>&1; done
+  hyprctl dispatch dpms on >/dev/null 2>&1
+}
 
 # --- Reach the live Hyprland instance even when Sunshine doesn't carry its env ---
 : "${XDG_RUNTIME_DIR:=/run/user/$(id -u)}"; export XDG_RUNTIME_DIR
@@ -59,23 +72,23 @@ case "${1:-}" in
       exit 1
     fi
 
-    for m in "${PHYSICAL_OUTPUTS[@]}"; do hyprctl keyword monitor "$m, disable" >/dev/null; done
-
-    # Headless outputs take a plain mode (no real timings needed), matching what worked for you.
+    # Size + focus the streaming output BEFORE dropping the panels, so there is never a
+    # zero-enabled-output gap. Headless outputs take a plain mode (no real timings needed).
     if [ -n "$W" ] && [ -n "$H" ]; then
       hyprctl keyword monitor "$VIRTUAL_OUTPUT, ${W}x${H}@${FPS}, auto, 1" >/dev/null
     else
       hyprctl keyword monitor "$VIRTUAL_OUTPUT, $FALLBACK_MODE, auto, 1" >/dev/null
     fi
     hyprctl dispatch focusmonitor "$VIRTUAL_OUTPUT" >/dev/null 2>&1
+
+    for m in "${PHYSICAL_OUTPUTS[@]}"; do hyprctl keyword monitor "$m, disable" >/dev/null; done
     log "streaming on $VIRTUAL_OUTPUT (${W:-?}x${H:-?}@${FPS})"
     ;;
 
   undo)
     log "restoring physical displays"
-    hyprctl reload >/dev/null 2>&1                       # restores physicals + re-parks headless via monitor=...,disable
+    restore_physicals                                    # explicit re-enable; never `hyprctl reload` (#6623)
     hyprctl keyword monitor "$VIRTUAL_OUTPUT, disable" >/dev/null 2>&1
-    hyprctl dispatch dpms on >/dev/null 2>&1
     ;;
 
   *) echo "Usage: $0 {do|undo}" >&2; exit 2 ;;
