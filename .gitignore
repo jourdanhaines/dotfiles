@@ -1,0 +1,3 @@
+nohup.out
+*.bak.*
+.claude/settings.local.json
