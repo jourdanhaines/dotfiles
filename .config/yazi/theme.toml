@@ -1,0 +1,132 @@
+#:schema https://yazi-rs.github.io/schemas/theme.json
+# OpenCode dark theme for yazi (palette from sst/opencode opencode.json)
+
+[app]
+# yazi 26.5.6 applies this via OSC 11, so it stays translucent under ghostty's
+# background-opacity; the next release (PR #4023) cell-paints it fully opaque.
+overall = { bg = "#0a0a0a" }
+
+[mgr]
+cwd = { fg = "#5c9cf5", bold = true }
+
+find_keyword  = { fg = "#fab283", bold = true, underline = true }
+find_position = { fg = "#9d7cd8", bg = "reset", bold = true }
+
+symlink_target = { fg = "#56b6c2", italic = true }
+
+marker_copied   = { fg = "#7fd88f", bg = "#7fd88f" }
+marker_cut      = { fg = "#e06c75", bg = "#e06c75" }
+marker_marked   = { fg = "#56b6c2", bg = "#56b6c2" }
+marker_selected = { fg = "#e5c07b", bg = "#e5c07b" }
+marker_symbol   = "│"
+
+count_copied   = { fg = "#0a0a0a", bg = "#7fd88f" }
+count_cut      = { fg = "#0a0a0a", bg = "#e06c75" }
+count_selected = { fg = "#0a0a0a", bg = "#e5c07b" }
+
+border_symbol = "│"
+border_style  = { fg = "#3c3c3c" }
+
+[indicator]
+parent  = { bg = "#1e1e1e" }
+current = { bg = "#282828" }
+preview = { underline = true }
+padding = { open = "█", close = "█" }      # square caps: keep padding, no rounding
+
+[tabs]
+active   = { fg = "#eeeeee", bg = "#282828", bold = true }
+inactive = { fg = "#808080", bg = "#0a0a0a" }
+sep_inner = { open = "", close = "" }      # flat, no powerline — OpenCode style
+sep_outer = { open = "", close = "" }
+
+[mode]
+normal_main = { fg = "#0a0a0a", bg = "#5c9cf5", bold = true }
+normal_alt  = { fg = "#5c9cf5", bg = "#141414" }
+select_main = { fg = "#0a0a0a", bg = "#fab283", bold = true }
+select_alt  = { fg = "#fab283", bg = "#141414" }
+unset_main  = { fg = "#0a0a0a", bg = "#e06c75", bold = true }
+unset_alt   = { fg = "#e06c75", bg = "#141414" }
+
+[status]
+overall   = { fg = "#eeeeee", bg = "#141414" }
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+perm_sep   = { fg = "#606060" }
+perm_type  = { fg = "#7fd88f" }
+perm_read  = { fg = "#e5c07b" }
+perm_write = { fg = "#e06c75" }
+perm_exec  = { fg = "#56b6c2" }
+progress_label  = { fg = "#eeeeee", bold = true }
+progress_normal = { fg = "#5c9cf5", bg = "#141414" }
+progress_error  = { fg = "#e06c75", bg = "#141414" }
+
+[which]
+cols            = 3
+mask            = { bg = "#0a0a0a" }
+cand            = { fg = "#5c9cf5" }
+rest            = { fg = "#808080" }
+desc            = { fg = "#eeeeee" }
+separator       = "  "
+separator_style = { fg = "#484848" }
+
+[confirm]
+border  = { fg = "#484848" }
+title   = { fg = "#fab283", bold = true }
+body    = { fg = "#eeeeee", bg = "#141414" }
+list    = { fg = "#eeeeee", bg = "#141414" }
+btn_yes = { fg = "#0a0a0a", bg = "#5c9cf5" }
+btn_no  = { fg = "#808080" }
+
+[spot]
+border   = { fg = "#484848" }
+title    = { fg = "#fab283" }
+tbl_col  = { fg = "#5c9cf5", bold = true }
+tbl_cell = { fg = "#fab283", reversed = true }
+
+[notify]
+title_info  = { fg = "#7fd88f" }
+title_warn  = { fg = "#f5a742" }
+title_error = { fg = "#e06c75" }
+
+[pick]
+border   = { fg = "#484848" }
+active   = { fg = "#fab283", bold = true }
+inactive = { fg = "#808080" }
+
+[input]
+border   = { fg = "#5c9cf5" }              # blue focus border = OpenCode input bar
+title    = { fg = "#808080" }
+value    = { fg = "#eeeeee" }
+selected = { bg = "#323232" }
+
+[cmp]
+border   = { fg = "#484848" }
+active   = { fg = "#eeeeee", bg = "#282828" }
+inactive = { fg = "#808080" }
+
+[tasks]
+border  = { fg = "#484848" }
+title   = { fg = "#eeeeee" }
+hovered = { fg = "#fab283", bg = "#1e1e1e" }
+
+[help]
+on      = { fg = "#5c9cf5" }
+run     = { fg = "#fab283" }
+desc    = { fg = "#808080" }
+hovered = { bg = "#282828", bold = true }
+footer  = { fg = "#808080", bg = "#141414" }
+
+[filetype]
+rules = [
+  { mime = "image/*",  fg = "#e5c07b" },
+  { mime = "{audio,video}/*", fg = "#9d7cd8" },
+  { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#f5a742" },
+  { mime = "application/{pdf,doc,rtf}", fg = "#56b6c2" },
+  { mime = "vfs/{absent,stale}", fg = "#484848" },
+  { url = "*", is = "orphan", fg = "#e06c75", crossed = true },
+  { url = "*", is = "exec",   fg = "#7fd88f" },
+  { url = "*", is = "dummy",  fg = "#e06c75" },
+  { url = "*/", is = "dummy", fg = "#e06c75" },
+  { url = "*/", fg = "#5c9cf5", bold = true },   # directories: OpenCode blue
+  { url = "*",  fg = "#eeeeee" },                # regular files
+]
