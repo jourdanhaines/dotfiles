@@ -1,0 +1,50 @@
+/* OpenCode dark theme for ripdrag — matches yazi theme.toml palette.
+   Loaded by pointing XDG_CONFIG_HOME here (see keymap.toml), so it
+   only affects ripdrag, not other GTK4 apps. */
+
+window {
+  background-color: #0a0a0a;
+  color: #eeeeee;
+  font-family: monospace;
+}
+
+headerbar {
+  background-color: #141414;
+  color: #eeeeee;
+  border-bottom: 1px solid #3c3c3c;
+  box-shadow: none;
+  min-height: 28px;
+}
+
+headerbar windowtitle {
+  color: #808080;
+  font-size: 0.9em;
+}
+
+listview, list, scrolledwindow {
+  background-color: #0a0a0a;
+}
+
+button {
+  background: #141414;
+  color: #eeeeee;
+  border: 1px solid #3c3c3c;
+  border-radius: 0;
+  box-shadow: none;
+  text-shadow: none;
+  padding: 4px 8px;
+}
+
+button:hover {
+  background: #282828;
+  border-color: #5c9cf5;
+}
+
+button:active {
+  background: #282828;
+  border-color: #fab283;
+}
+
+label {
+  color: #eeeeee;
+}
