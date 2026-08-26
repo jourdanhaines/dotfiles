@@ -15,6 +15,7 @@
   "modules-center": ["clock", "custom/weather"],
 
   "modules-right": [
+    "custom/claude",
     "bluetooth",
     "network",
     "tray",
@@ -98,6 +99,15 @@
     "tooltip": false,
     "interval": 1600,
     "exec": "$HOME/.config/waybar/scripts/uptime.sh"
+  },
+
+  "custom/claude": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 300,
+    "signal": 10,
+    "exec": "$HOME/.config/waybar/scripts/claude-usage.sh status",
+    "on-click": "$HOME/.config/waybar/scripts/claude-usage.sh notify"
   },
 
   "backlight": {

@@ -505,4 +505,11 @@
     ellipsize = end
     format = "<b>%s</b>\n\n%b"
 
+[claude-usage]
+    stack_tag = "claude-usage"
+    icon_position = off
+    timeout = 10
+    word_wrap = no
+    format = "<b>%s</b>\n\n%b"
+
 # vim: ft=cfg
