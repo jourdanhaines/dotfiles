@@ -36,7 +36,7 @@ monitor=sunshine,disable
 # Set programs that you use
 $terminal = ghostty
 $fileManager = dolphin
-$menu = /home/alpinedev/.local/bin/banshee toggle
+$menu = wofi --show drun --normal-window
 
 
 #################
@@ -404,12 +404,4 @@ windowrule {
     no_shadow = on
     no_focus = true
     border_size = 0
-}
-
-# banshee launcher — https://github.com/jourdanhaines/banshee
-layerrule {
-    name = banshee
-    match:namespace = banshee
-    blur = on
-    ignore_alpha = 0
 }
