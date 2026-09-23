@@ -22,8 +22,8 @@
 ################
 
 # See https://wiki.hypr.land/Configuring/Monitors/
-monitor=DP-1,3440x1440@143.85,0x1440,1
-monitor=HDMI-A-1,3440x1440@84.96,0x0,1
+monitor=DP-1,3440x1440@143.85,0x0,1
+monitor=HDMI-A-1,3440x1440@84.96,0x-1440,1
 monitor=sunshine,disable
 
 
@@ -51,8 +51,6 @@ $menu = /home/alpinedev/.local/bin/banshee toggle
 exec-once = waybar & hyprpaper
 exec-once = discord
 exec-once = zen-browser
-# XWayland games center on the X primary output; make it the gaming monitor
-exec-once = xrandr --output DP-1 --primary
 exec-once = steam -silent
 exec-once = hyprctl output create headless sunshine
 
@@ -406,14 +404,6 @@ windowrule {
     no_shadow = on
     no_focus = true
     border_size = 0
-}
-
-windowrule {
-    # Wine/Proton dialogs (installers, launchers) spawn off-screen on multi-monitor
-    name = center-xwayland-floating
-    match:xwayland = true
-    match:float = true
-    center = on
 }
 
 # banshee launcher — https://github.com/jourdanhaines/banshee
