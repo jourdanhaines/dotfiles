@@ -34,7 +34,7 @@ setsid steam steam://open/bigpicture >/dev/null 2>&1 &
 # Wait for the BP window to map (Steam may still be cold-starting), then focus it.
 for _ in $(seq 1 30); do
   if hyprctl clients 2>/dev/null | grep -q "$BP_TITLE"; then
-    hyprctl dispatch focuswindow "title:^(${BP_TITLE})\$" >/dev/null 2>&1
+    hyprctl dispatch "hl.dsp.focus({ window = 'title:^(${BP_TITLE})\$' })" >/dev/null 2>&1
     log "Big Picture focused"
     exit 0
   fi
