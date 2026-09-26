@@ -33,10 +33,13 @@ log(){ printf '%s [vdisplay] %s\n' "$(date +%H:%M:%S)" "$*" | tee -a "$LOG" >&2;
 
 # Deterministically bring the physical panels back. Never relies on `hyprctl reload`.
 restore_physicals(){
-  local spec out
+  local spec out m
   for spec in "${PHYSICAL_RESTORE[@]}"; do
     out="$(hyprctl eval "hl.monitor({ $spec })" 2>&1)"
     [ "$out" = "ok" ] || log "restore failed for [$spec]: $out"
+  done
+  for m in "${PHYSICAL_OUTPUTS[@]}"; do
+    wait_enabled "$m" || log "WARNING: $m still disabled after restore"
   done
   hyprctl dispatch 'hl.dsp.dpms({ action = "enable" })' >/dev/null 2>&1
 }
@@ -60,6 +63,10 @@ fi
 monitor_exists(){ hyprctl monitors all 2>/dev/null | grep -q "Monitor $1 "; }
 # `monitors all` also lists disabled outputs, so check the enabled state explicitly.
 monitor_enabled(){ hyprctl -j monitors all 2>/dev/null | jq -e --arg n "$1" '.[] | select(.name==$n and .disabled==false)' >/dev/null; }
+# Monitor changes via eval apply on a later compositor tick; poll instead of checking once.
+wait_enabled(){ local i; for i in $(seq 1 30); do monitor_enabled "$1" && return 0; sleep 0.1; done; return 1; }
+wait_disabled(){ local i; for i in $(seq 1 30); do monitor_enabled "$1" || return 0; sleep 0.1; done; return 1; }
+wait_exists(){ local i; for i in $(seq 1 30); do monitor_exists "$1" && return 0; sleep 0.1; done; return 1; }
 
 case "${1:-}" in
   do)
@@ -69,7 +76,7 @@ case "${1:-}" in
     if ! monitor_exists "$VIRTUAL_OUTPUT"; then
       log "headless '$VIRTUAL_OUTPUT' missing; creating"
       hyprctl output create headless "$VIRTUAL_NAME" >/dev/null 2>&1
-      sleep 0.3
+      wait_exists "$VIRTUAL_OUTPUT" || true
     fi
 
     # SAFETY: never disable the real monitors unless the virtual one is actually present.
@@ -85,13 +92,16 @@ case "${1:-}" in
     [ "$out" = "ok" ] || log "sizing failed for $VIRTUAL_OUTPUT ($MODE): $out"
 
     # SAFETY: the physical panels only go off once the headless output is actually enabled.
-    if ! monitor_enabled "$VIRTUAL_OUTPUT"; then
+    if ! wait_enabled "$VIRTUAL_OUTPUT"; then
       log "ERROR: headless output failed to enable. Leaving displays on, aborting."
       exit 1
     fi
     hyprctl dispatch "hl.dsp.focus({ monitor = '$VIRTUAL_OUTPUT' })" >/dev/null 2>&1
 
-    for m in "${PHYSICAL_OUTPUTS[@]}"; do hyprctl eval "hl.monitor({ output = '$m', disabled = true })" >/dev/null; done
+    for m in "${PHYSICAL_OUTPUTS[@]}"; do
+      out="$(hyprctl eval "hl.monitor({ output = '$m', disabled = true })" 2>&1)"
+      [ "$out" = "ok" ] || log "disable failed for $m: $out"
+    done
     log "streaming on $VIRTUAL_OUTPUT (${W:-?}x${H:-?}@${FPS})"
     ;;
 
@@ -99,6 +109,7 @@ case "${1:-}" in
     log "restoring physical displays"
     restore_physicals                                    # explicit re-enable; reload won't do it
     hyprctl eval "hl.monitor({ output = '$VIRTUAL_OUTPUT', disabled = true })" >/dev/null 2>&1
+    wait_disabled "$VIRTUAL_OUTPUT" || log "WARNING: $VIRTUAL_OUTPUT still enabled"
     ;;
 
   *) echo "Usage: $0 {do|undo}" >&2; exit 2 ;;
